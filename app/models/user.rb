@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # フォローされている関連付け
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # フォローしているユーザーを取得
-  has_many :followings, through: :active_relationships, source: :followed
+  has_many :following, through: :active_relationships, source: :followed
   # フォロワーを取得　source以降は省略可
   has_many :followers, through: :passive_relationships, source: :follower
   
