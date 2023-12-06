@@ -22,7 +22,9 @@
             <%=render "favorites/favorite",book: @book%> 
           </td>
         
-          <td>コメント数：<%= @book.book_comments.count %></td>
+          <td id="comment_counter">
+            <%= render "book_comments/counter", book: @book %>
+          </td>
             
           <% if @book.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
@@ -31,10 +33,13 @@
         </tr>
       </table>
       
-      <div　class=comment_index><%=render "comment_index", book: @book%></div>
-      <div> 
+      <div class="comment_index">
+        <%=render "book_comments/comment_index", book: @book %>
+      </div>
+      
+      <div class="col-md-8 offset-md-3"> 
         <%= form_with model: [@book, @book_comment], local: false do |f| %>
-        <%= f.text_area :comment, rows: '5' %>
+        <%= f.text_area :comment, rows: '5', class: "w-100", id: "comment_textarea" %>
         <%= f.submit "送信" %>
         <% end %>
       </div>
